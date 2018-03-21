@@ -1,0 +1,28 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block body_id 'admin_supplier_edit' %}
+
+{% block main %}
+    <h1>{{ 'title.edit_supplier'|trans({'%id%': supplier.id}) }}</h1>
+
+    {{ include('admin/supplier/_form.html.twig', {
+        form: form,
+        button_label: 'action.save'|trans,
+        include_back_to_home_link: true,
+    }, with_context = false) }}
+{% endblock %}
+
+{% block sidebar %}
+    <div class="section">
+        <a href="{{ path('admin_supplier_show', {id: supplier.id}) }}" class="btn btn-lg btn-block btn-success">
+            <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show_supplier'|trans }}
+        </a>
+    </div>
+
+    <div class="section actions">
+        {{ include('admin/supplier/_delete_form.html.twig', {supplier: supplier}, with_context = false) }}
+    </div>
+
+    {{ parent() }}
+
+{% endblock %}
