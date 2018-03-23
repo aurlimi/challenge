@@ -19,6 +19,7 @@ class CommandeType extends AbstractType
     {
         $builder->add('commande_produits', CollectionType::class,array(
                     'entry_type' => CommandeProductType::class,
+                    'allow_add' =>true,
                     'allow_delete' => true,
                     'delete_empty' => true,
                     'prototype' => true,

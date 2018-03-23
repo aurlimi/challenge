@@ -26,14 +26,22 @@
                     </a>
                 </p>
             </div>
-            {% if app.user is empty %}
+            {% if app.user  %}
             <div class="jumbotron">
                 <p>
-                    <a class="btn btn-primary btn-lg" href="{{ path('fos_user_registration_register') }}">
-                        {{ 'inscription'|trans }}
+                    <a class="btn btn-primary btn-lg" href="{{ path('fos_user_security_logout') }}">
+                        {{ 'logout'|trans }}
                     </a>
                 </p>
             </div>
+            {% else %}
+                <div class="jumbotron">
+                    <p>
+                        <a class="btn btn-primary btn-lg" href="{{ path('fos_user_registration_register') }}">
+                            {{ 'inscription'|trans }}
+                        </a>
+                    </p>
+                </div>
             {% endif %}
         </div>
 
