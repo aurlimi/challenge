@@ -41,7 +41,7 @@
 
                         {% block header_navigation_links %}
                             <li>
-                                <a href="{{ path('blog_index') }}">
+                                <a href="{{ path('homepage') }}">
                                     <i class="fa fa-home" aria-hidden="true"></i> {{ 'menu.homepage'|trans }}
                                 </a>
                             </li>
@@ -57,7 +57,7 @@
 
                         {% if app.user %}
                             <li>
-                                <a href="{{ path('security_logout') }}">
+                                <a href="{{ path('fos_user_security_logout') }}">
                                     <i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'menu.logout'|trans }}
                                 </a>
                             </li>

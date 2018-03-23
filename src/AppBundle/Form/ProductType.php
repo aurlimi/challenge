@@ -6,7 +6,9 @@ use AppBundle\Entity\Supplier;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -28,17 +30,24 @@ class ProductType extends AbstractType
             ->add('mark',null,[
                 'label' =>'label.mark'
             ])
-            ->add('quantity',null,[
-                'label' => 'label.quantity'
+            ->add('quantity',IntegerType::class,[
+                'label' => 'label.quantity',
+                'attr' =>['min' => 0]
             ])
             ->add('price',null,[
                 'label' =>'label.price'
             ])
+            ->add('types', ChoiceType::class, array(
+                'choices' => array('Soleil' => 'Soleil', 'Vue' => 'Vue', 'Sport' => 'Sport'),
+            ))
+            ->add('genre', ChoiceType::class, array(
+                'choices' => array('Homme' => 'Homme', 'Femme' => 'Femme', 'Mixte' => 'Mixte', 'Enfant' => 'Enfant'),
+            ))
             ->add('supplier',EntityType::class , array(
                 'class' => 'AppBundle:Supplier',
                 'label' =>'label.supplier',
                 'multiple' => false
-    ));
+            ));
     }/**
      * {@inheritdoc}
      */

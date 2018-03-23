@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
  * controller manage product backend
  *
  * @Route("/admin/product")
- *
+ *@Security("has_role('ROLE_ADMIN')")
  * Class ProductController
  * @package AppBundle\Controller
  */
@@ -28,8 +28,7 @@ class ProductController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        //@todo findby author
-        $products = $em->getRepository(Product::class)->findAll();
+        $products = $em->getRepository(Product::class)->findBy(['user' => $this->getUser()]);
         return $this->render('admin/product/index.html.twig', ['products' => $products]);
     }
 
@@ -39,14 +38,11 @@ class ProductController extends Controller
      * @Route("/new", name="admin_product_new")
      * @Method({"GET", "POST"})
      *
-     * NOTE: the Method annotation is optional, but it's a recommended practice
-     * to constraint the HTTP methods each controller responds to (by default
-     * it responds to all methods).
      */
     public function newAction(Request $request)
     {
         $product = new Product();
-        //@todo add author $post->setAuthor($this->getUser());
+        $product->setUser($this->getUser());
 
         // See https://symfony.com/doc/current/book/forms.html#submitting-forms-with-multiple-buttons
         $form = $this->createForm(ProductType::class, $product)
@@ -54,9 +50,6 @@ class ProductController extends Controller
 
         $form->handleRequest($request);
 
-        // the isSubmitted() method is completely optional because the other
-        // isValid() method already checks whether the form is submitted.
-        // However, we explicitly add it to improve code readability.
         // See https://symfony.com/doc/current/best_practices/forms.html#handling-form-submits
         if ($form->isSubmitted() && $form->isValid()) {
             //$post->setSlug($slugger->slugify($post->getTitle()));
@@ -65,9 +58,6 @@ class ProductController extends Controller
             $em->persist($product);
             $em->flush();
 
-            // Flash messages are used to notify the user about the result of the
-            // actions. They are deleted automatically from the session as soon
-            // as they are accessed.
             // See https://symfony.com/doc/current/book/controller.html#flash-messages
             $this->addFlash('success', 'product.created_successfully');
 
@@ -75,7 +65,7 @@ class ProductController extends Controller
                 return $this->redirectToRoute('admin_product_new');
             }
 
-            return $this->redirectToRoute('admin_index_index');
+            return $this->redirectToRoute('admin_index');
         }
 
         return $this->render('admin/product/new.html.twig', [
@@ -92,9 +82,6 @@ class ProductController extends Controller
      */
     public function showAction(Product $product)
     {
-        // This security check can also be performed
-        // using an annotation: @Security("is_granted('show', product)")
-        //$this->denyAccessUnlessGranted('show', $product, 'Products can only be shown to their authors.');
 
         return $this->render('admin/product/show.html.twig', [
             'product' => $product,
@@ -134,15 +121,12 @@ class ProductController extends Controller
      * @Route("/{id}/delete", name="admin_product_delete")
      * @Method("POST")
      *
-     * The Security annotation value is an expression (if it evaluates to false,
-     * the authorization mechanism will prevent the user accessing this resource).
      */
     public function deleteAction(Request $request, Product $product)
     {
-        //@todo security
-        /*if (!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
+        if (!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
             return $this->redirectToRoute('admin_product_index');
-        }*/
+        }
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($product);

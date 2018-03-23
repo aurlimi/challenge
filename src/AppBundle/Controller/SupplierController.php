@@ -37,14 +37,10 @@ class SupplierController extends Controller
      * @Route("/new", name="admin_supplier_new")
      * @Method({"GET", "POST"})
      *
-     * NOTE: the Method annotation is optional, but it's a recommended practice
-     * to constraint the HTTP methods each controller responds to (by default
-     * it responds to all methods).
      */
     public function newAction(Request $request)
     {
         $supplier = new Supplier();
-        //@todo add author $post->setAuthor($this->getUser());
 
         // See https://symfony.com/doc/current/book/forms.html#submitting-forms-with-multiple-buttons
         $form = $this->createForm(SupplierType::class, $supplier)
@@ -63,9 +59,6 @@ class SupplierController extends Controller
             $em->persist($supplier);
             $em->flush();
 
-            // Flash messages are used to notify the user about the result of the
-            // actions. They are deleted automatically from the session as soon
-            // as they are accessed.
             // See https://symfony.com/doc/current/book/controller.html#flash-messages
             $this->addFlash('success', 'supplier.created_successfully');
 
@@ -73,7 +66,7 @@ class SupplierController extends Controller
                 return $this->redirectToRoute('admin_supplier_new');
             }
 
-            return $this->redirectToRoute('admin_index_index');
+            return $this->redirectToRoute('admin_index');
         }
 
         return $this->render('admin/supplier/new.html.twig', [
@@ -90,9 +83,6 @@ class SupplierController extends Controller
      */
     public function showAction(Supplier $supplier)
     {
-        // This security check can also be performed
-        // using an annotation: @Security("is_granted('show', supplier)")
-        //$this->denyAccessUnlessGranted('show', $supplier, 'Suppliers can only be shown to their authors.');
 
         return $this->render('admin/supplier/show.html.twig', [
             'supplier' => $supplier,
@@ -132,16 +122,9 @@ class SupplierController extends Controller
      * @Route("/{id}/delete", name="admin_supplier_delete")
      * @Method("POST")
      *
-     * The Security annotation value is an expression (if it evaluates to false,
-     * the authorization mechanism will prevent the user accessing this resource).
      */
     public function deleteAction(Request $request, Supplier $supplier)
     {
-        //@todo security
-        /*if (!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
-            return $this->redirectToRoute('admin_supplier_index');
-        }*/
-
         $em = $this->getDoctrine()->getManager();
         $em->remove($supplier);
         $em->flush();

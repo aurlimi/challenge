@@ -3,37 +3,52 @@
 {% block body_id 'blog_index' %}
 
 {% block main %}
-    {% for product in products %}
-        <article class="post">
-            <h2>
-                <a href="{{ path('blog_product', {slug: product.slug}) }}">
-                    {{ product.title }}
-                </a>
-            </h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for commande in commandes %}
+                <tr>
+                    <td><a href="{{ path('app_commande_show', { 'id': commande.id }) }}">{{ commande.id }}</a></td>
+                    <td>{% if commande.date %}{{ commande.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_commande_show', { 'id': commande.id }) }}">show</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_commande_edit', { 'id': commande.id }) }}">edit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3" align="center">
+                        <div class="well">{{ 'commande.no_commande_found'|trans }}</div>
+                    </td>
 
-            <p class="post-metadata">
-                <span class="metadata"><i class="fa fa-calendar"></i> {{ product.publishedAt|localizeddate('long', 'medium', null, 'UTC') }}</span>
-                <span class="metadata"><i class="fa fa-user"></i> {{ product.author.fullName }}</span>
-            </p>
+                </tr>
 
-            {{ product.summary|md2html }}
+            {% endfor %}
+            </tbody>
+        </table>
 
-            {{ include('blog/_product_tags.html.twig') }}
-        </article>
-    {% else %}
-        <div class="well">{{ 'post.no_posts_found'|trans }}</div>
-    {% endfor %}
 
-    {% if products.haveToPaginate %}
-        <div class="navigation text-center">
-            {{ pagerfanta(products, 'twitter_bootstrap3_translated', {routeName: 'blog_index_paginated'}) }}
-        </div>
-    {% endif %}
+
 {% endblock %}
 
 {% block sidebar %}
+    <div class="section actions">
+        <a href="{{ path('app_commande_new') }}" class="btn btn-lg btn-block btn-success">
+            <i class="fa fa-plus" aria-hidden="true"></i> {{ 'action.create_commande'|trans }}
+        </a>
+    </div>
     {{ parent() }}
 
-    {#show_source_code(_self)#}
-    {# include('blog/_rss.html.twig') #}
 {% endblock %}

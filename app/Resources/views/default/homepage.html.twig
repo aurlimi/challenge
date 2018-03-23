@@ -21,11 +21,20 @@
                     {{ 'help.browse_app'|trans|raw }}
                 </p>
                 <p>
-                    <a class="btn btn-primary btn-lg" href="#{# path('blog_index') #}">
+                    <a class="btn btn-primary btn-lg" href="{{ path('app_index') }}">
                         <i class="fa fa-users" aria-hidden="true"></i> {{ 'action.browse_app'|trans }}
                     </a>
                 </p>
             </div>
+            {% if app.user is empty %}
+            <div class="jumbotron">
+                <p>
+                    <a class="btn btn-primary btn-lg" href="{{ path('fos_user_registration_register') }}">
+                        {{ 'inscription'|trans }}
+                    </a>
+                </p>
+            </div>
+            {% endif %}
         </div>
 
         <div class="col-sm-6">
