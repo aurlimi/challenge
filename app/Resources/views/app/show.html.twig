@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block body_id 'admin_post_show'%}
+  {% block main %}
     <h1>Commande</h1>
 
     <table>
@@ -29,4 +30,8 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
+{% endblock %}
+{% block sidebar %}
+    {{ parent() }}
+
 {% endblock %}

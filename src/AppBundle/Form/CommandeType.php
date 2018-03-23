@@ -18,9 +18,11 @@ class CommandeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('commande_produits', CollectionType::class,array(
-                   'entry_type' => CommandeProductType::class,
-                   'entry_options' => array() ,
-                   'allow_add'  => true
+                    'entry_type' => CommandeProductType::class,
+                    'allow_delete' => true,
+                    'delete_empty' => true,
+                    'prototype' => true,
+                    'by_reference' => false
             ));
     }/**
      * {@inheritdoc}

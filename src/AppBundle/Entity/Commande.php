@@ -40,7 +40,7 @@ class Commande
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="CommandeProduct", mappedBy="commande",)
+     * @ORM\OneToMany(targetEntity="CommandeProduct", mappedBy="commande")
      */
     private $commande_produits;
 

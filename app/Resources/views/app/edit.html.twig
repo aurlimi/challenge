@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Commande edit</h1>
+{% block body_id 'blog_index' %}
+    {% block main %}
+    <h1>Modification Commande </h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
@@ -18,4 +19,14 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
+  {% endblock %}
+
+{% block sidebar %}
+        <div class="section actions">
+            <a href="{{ path('app_commande_new') }}" class="btn btn-lg btn-block btn-success">
+                <i class="fa fa-plus" aria-hidden="true"></i> {{ 'action.create_commande'|trans }}
+            </a>
+        </div>
+        {{ parent() }}
+
 {% endblock %}
