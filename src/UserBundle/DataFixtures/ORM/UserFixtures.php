@@ -53,18 +53,7 @@ class UserFixtures extends AbstractFixture implements ContainerAwareInterface
         $manager->persist($aurlAdmin);
 
 
-
-        $hobianUser = new User();
-        $hobianUser->setFirstName('Aninomenjanahary');
-        $hobianUser->setUsername('hobiana_user');
-        $hobianUser->setEmail('hobiana@gmail.com');
-        $hobianUser->setPhone('0330409164');
-        $hobianUser->setAddress('Lot IVW MHA');
-        $hobianUser->setEnabled(1);
-        $hobianUser->setRoles(['ROLE_USER']);
-        $encodedPassword = $passwordEncoder->encodePassword($aurlAdmin, '123456');
-        $hobianUser->setPassword($encodedPassword);
-        $manager->persist($hobianUser);
+        
 
         $manager->flush();
     }

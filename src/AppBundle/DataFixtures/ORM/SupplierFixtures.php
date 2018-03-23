@@ -40,17 +40,13 @@ class SupplierFixtures extends AbstractFixture implements ContainerAwareInterfac
     {
         $passwordEncoder = $this->container->get('security.password_encoder');
 
-        $fournisseur1 = new Supplier();
-        $fournisseur1->setName('Fournisseur1');
-        $fournisseur1->setAddress('Tana 101');
-        $fournisseur1->setPhone('0331245689');
-        $manager->persist($fournisseur1);
+
 
         $fournisseur2 = new Supplier();
         $fournisseur2->setName('Fournisseur2');
         $fournisseur2->setAddress('Tana 102');
         $fournisseur2->setPhone('0331245689');
-        $manager->persist($fournisseur1);
+        $manager->persist($fournisseur2);
 
 
         $manager->flush();
