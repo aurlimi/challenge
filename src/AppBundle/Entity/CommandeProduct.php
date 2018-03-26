@@ -43,7 +43,7 @@ class CommandeProduct
 
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Commande", inversedBy="commande_produits")
 
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(name="commande_id", referencedColumnName="id", nullable=false)
 
      */
 

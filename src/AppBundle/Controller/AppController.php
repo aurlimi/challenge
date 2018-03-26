@@ -50,12 +50,18 @@ class AppController extends Controller
         $form = $this->createForm(CommandeType::class, $commande);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
+            //var_dump($form);
             $em = $this->getDoctrine()->getManager();
-            $commandeProduct = new CommandeProduct();
-            $commande->addCommandeProduit($commandeProduct);
+            //
+            $data = $form->get('commande_produits')->getData();
+
+            foreach ($data as $data) {
+                $data->setCommande($commande);
+                $em->persist($data);
+            }
             $em->persist($commande);
-            $em->persist($commandeProduct);
             $em->flush();
 
             return $this->redirectToRoute('app_commande_show', array('id' => $commande->getId()));
@@ -76,10 +82,10 @@ class AppController extends Controller
     public function showAction(Commande $commande)
     {
         $deleteForm = $this->createDeleteForm($commande);
+        $commande_produits = $commande->getCommandeProduits();
 
         return $this->render('app/show.html.twig', array(
-            'commande' => $commande,
-            'delete_form' => $deleteForm->createView(),
+            'commande_produits' => $commande_produits,
         ));
     }
 
@@ -121,6 +127,11 @@ class AppController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+             $data = $commande->getCommandeProduits();
+            //@todo debug
+            foreach ($data as $data){
+               $em->remove($data);
+            }
             $em->remove($commande);
             $em->flush();
         }

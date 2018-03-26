@@ -296,7 +296,7 @@
 
             <trans-unit id="help.app_description">
                 <source>help.app_description</source>
-                <target><![CDATA[Ceci est une <strong>application de démonstration</strong> Bocasay Challenge Symfony, template inspirer par symfony demo.]]></target>
+                <target><![CDATA[Ceci est une <strong>application de démonstration</strong> Bocasay Challenge Symfony, template inspiré de symfony demo.]]></target>
             </trans-unit>
             <trans-unit id="help.show_code">
                 <source>help.show_code</source>

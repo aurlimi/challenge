@@ -33,9 +33,4 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
-    #surcharge registration form fosuserbundle
-    app.form.registration.type:
-            class: UserBundle\Form\RegistrationFormType
-            arguments: [%fos_user.model.user.class%]
-            tags:
-                - { name: form.type, alias: app_user_registration }
+

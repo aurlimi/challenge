@@ -2,34 +2,36 @@
 
 {% block body_id 'admin_post_show'%}
   {% block main %}
-    <h1>Commande</h1>
+      <ul>
+          <li>
+              <a href="{{ path('app_index') }}">Back to the list</a>
+          </li>
+      </ul>
+      <h1>Commande</h1>
+      <div class="row">
+          <table class="table table-striped table-middle-aligned">
+              <thead>
+              <tr>
+                  <th>Produit</th>
+                  <th>Quntite achetée</th>
+                  <th>Prix unitaire</th>
+                  <th>Prix total</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for commande in commande_produits %}
+                  <tr>
+                      <td>{{ commande.product.title }}</td>
+                      <td>{{ commande.quantity }}</td>
+                      <td>{{ commande.product.price }}</td>
+                      <td>{{ commande.product.price*commande.quantity }}</td>
+                  </tr>
+              {% endfor %}
+              </tbody>
+          </table>
+      </div>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ commande.id }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{% if commande.date %}{{ commande.date|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('app_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('app_commande_edit', { 'id': commande.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}
 {% block sidebar %}
     {{ parent() }}

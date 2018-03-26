@@ -16,7 +16,7 @@ class CommandeProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('quantity',null,
-                    ['attr' =>['min' => 0]])
+                    ['attr' =>['min' => 1]])
                 ->add('product',EntityType::class , array(
                     'class' => 'AppBundle:Product',
                     'label' =>'label.product',

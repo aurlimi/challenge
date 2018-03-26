@@ -2,18 +2,19 @@
 
 {% block body_id 'admin_post_show' %}
     {% block main %}
-        <h1>Ajoutés vos commandes</h1>
-
-        {{ form_start(form) }}
-            {{ form_widget(form) }}
-            <input type="submit" value="Create" />
-        {{ form_end(form) }}
-
         <ul>
             <li>
                 <a href="{{ path('app_index') }}">Back to the list</a>
             </li>
         </ul>
+        <h1>Ajouter vos commandes</h1>
+
+        {{ form_start(form) }}
+            {{ form_widget(form.commande_produits) }}
+
+            <input type="submit" value="Create" />
+        {{ form_end(form) }}
+
     {% endblock %}
 {% block sidebar %}
         {{ parent() }}

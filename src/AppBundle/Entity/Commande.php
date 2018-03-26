@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use AppBundle\Form\CommandeProductType;
 use Doctrine\Common\Collections\ArrayCollection;
+use Userbundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,7 +41,7 @@ class Commande
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="CommandeProduct", mappedBy="commande")
+     * @ORM\OneToMany(targetEntity="CommandeProduct", mappedBy="commande", cascade={"persist"})
      */
     private $commande_produits;
 
@@ -92,7 +93,7 @@ class Commande
      *
      * @return Commande
      */
-    public function setUser(\Userbundle\Entity\User $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
 
@@ -116,7 +117,7 @@ class Commande
      *
      * @return Commande
      */
-    public function addCommandeProduit(\AppBundle\Entity\CommandeProduct $commandeProduit)
+    public function addCommandeProduit(CommandeProduct $commandeProduit)
     {
         $this->commande_produits[] = $commandeProduit;
 
@@ -130,7 +131,7 @@ class Commande
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeCommandeProduit(\AppBundle\Entity\CommandeProduct $commandeProduit)
+    public function removeCommandeProduit(CommandeProduct $commandeProduit)
     {
         return $this->commande_produits->removeElement($commandeProduit);
     }
