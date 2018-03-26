@@ -126,6 +126,11 @@ class SupplierController extends Controller
     public function deleteAction(Request $request, Supplier $supplier)
     {
         $em = $this->getDoctrine()->getManager();
+        $products = $supplier->getProducts();
+        if (!empty($products)) {
+            $this->addFlash('danger', 'supplier.deleted_reset');
+            return $this->redirectToRoute('admin_supplier_index');
+        }
         $em->remove($supplier);
         $em->flush();
 

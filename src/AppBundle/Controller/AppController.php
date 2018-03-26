@@ -128,7 +128,7 @@ class AppController extends Controller
         }
         
         $em = $this->getDoctrine()->getManager();
-         $data = $commande->getCommandeProduits();
+        $data = $commande->getCommandeProduits();
 
         foreach ($data as $data){
            $em->remove($data);

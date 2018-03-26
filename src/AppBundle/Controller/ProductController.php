@@ -128,6 +128,12 @@ class ProductController extends Controller
             return $this->redirectToRoute('admin_product_index');
         }
 
+        $commandes = $product->getProduitCommandes();
+        if (!empty($commandes)){
+            $this->addFlash('danger', 'product.deleted_reset');
+            return $this->redirectToRoute('admin_product_index');
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($product);
         $em->flush();

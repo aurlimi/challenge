@@ -30,7 +30,7 @@ class CommandeProduct
 
     /**
 
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Product")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Product", inversedBy="produit_commandes")
 
      * @ORM\JoinColumn(nullable=false)
 

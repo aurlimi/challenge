@@ -42,6 +42,13 @@ class Supplier
      */
     private $phone;
 
+    /**
+     * @var Product
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Product", mappedBy="supplier")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $products;
 
     /**
      * Get id
@@ -130,5 +137,47 @@ class Supplier
     {
         return $this->phone;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add product.
+     *
+     * @param \AppBundle\Entity\Product $product
+     *
+     * @return Supplier
+     */
+    public function addProduct(\AppBundle\Entity\Product $product)
+    {
+        $this->products[] = $product;
+
+        return $this;
+    }
+
+    /**
+     * Remove product.
+     *
+     * @param \AppBundle\Entity\Product $product
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeProduct(Product $product)
+    {
+        return $this->products->removeElement($product);
+    }
+
+    /**
+     * Get products.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+}

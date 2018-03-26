@@ -75,7 +75,7 @@ class Product
     /**
      * @var Supplier
      * 
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Supplier")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Supplier", inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
     private $supplier;
@@ -87,6 +87,12 @@ class Product
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="CommandeProduct", mappedBy="product", cascade={"persist"})
+     */
+    private $produit_commandes;
 
     /**
      * Get id
@@ -316,5 +322,48 @@ class Product
     public function getGenre()
     {
         return $this->genre;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->produit_commandes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add produitCommande.
+     *
+     * @param \AppBundle\Entity\CommandeProduct $produitCommande
+     *
+     * @return Product
+     */
+    public function addProduitCommande(\AppBundle\Entity\CommandeProduct $produitCommande)
+    {
+        $this->produit_commandes[] = $produitCommande;
+
+        return $this;
+    }
+
+    /**
+     * Remove produitCommande.
+     *
+     * @param \AppBundle\Entity\CommandeProduct $produitCommande
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeProduitCommande(\AppBundle\Entity\CommandeProduct $produitCommande)
+    {
+        return $this->produit_commandes->removeElement($produitCommande);
+    }
+
+    /**
+     * Get produitCommandes.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProduitCommandes()
+    {
+        return $this->produit_commandes;
     }
 }
