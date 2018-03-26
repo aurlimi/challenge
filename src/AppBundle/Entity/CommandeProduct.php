@@ -51,10 +51,9 @@ class CommandeProduct
 
     public function __construct()
     {
-        $this->quantity = 1;
+        
     }
-
-
+    
     /**
      * Get id.
      *

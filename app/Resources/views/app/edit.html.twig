@@ -24,10 +24,8 @@
             <a href="{{ path('app_commande_new') }}" class="btn btn-lg btn-block btn-success">
                 <i class="fa fa-plus" aria-hidden="true"></i> {{ 'action.create_commande'|trans }}
             </a>
-            <div>
-                {{ form_start(delete_form) }}
-                <input type="submit" value="Delete" class="btn btn-lg btn-block btn-danger">
-                {{ form_end(delete_form) }}
+            <div class="section">
+                {{ include('app/_delete_form.html.twig', {commande: commande}, with_context = false) }}
             </div>
 
         </div>

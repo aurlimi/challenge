@@ -7,7 +7,7 @@ import 'bootstrap-sass/assets/javascripts/bootstrap/transition.js';
 import './highlight.js';
 
 var edit_commande = $('div#edit_commande');
-//'attribut « data-prototype » qui nous intéresse.
+//attribut « data-prototype » qui nous intéresse.
 var $container = $('div#appbundle_commande_commande_produits');
 // On ajoute un lien pour ajouter une nouvelle produit
 var $lienAjout = $('<a href="#" id="ajout_commande" class="btn btn-primary">Ajouter un produit</a>');
@@ -25,7 +25,7 @@ $lienAjout.click(function(e) {
 var index = $container.find(':input').length;
 
 // On ajoute un premier champ directement s'il n'en existe pas déjà un (cas d'un nouvel article par exemple).
-if (index == 0) {
+if (index == 0 && $container.length == 1) {
     ajouterProduit($container);
 } else {
 // Pour chaque produit déjà existante, on ajoute un lien de suppression
@@ -61,3 +61,23 @@ function ajouterLienSuppression($prototype) {
         return false;
     });
 }
+
+// Handling the modal confirmation message.
+$(document).on('submit', 'form[data-confirmation]', function (event) {
+    var $form = $(this),
+        $confirm = $('#confirmationModal');
+
+    if ($confirm.data('result') !== 'yes') {
+        //cancel submit event
+        event.preventDefault();
+
+        $confirm
+            .off('click', '#btnYes')
+            .on('click', '#btnYes', function () {
+                $confirm.data('result', 'yes');
+                $form.find('input[type="submit"]').attr('disabled', 'disabled');
+                $form.submit();
+            })
+            .modal('show');
+    }
+});
