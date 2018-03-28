@@ -78,11 +78,11 @@
             </trans-unit>
             <trans-unit id="title.product_list">
                 <source>title.product_list</source>
-                <target>Liste des Products</target>
+                <target>Liste des Produits</target>
             </trans-unit>
             <trans-unit id="title.edit_product">
                 <source>title.edit_product</source>
-                <target>Modifier l'Product #%id%</target>
+                <target>Modifier l'Produit #%id%</target>
             </trans-unit>
             <trans-unit id="title.add_comment">
                 <source>title.add_comment</source>
@@ -107,7 +107,7 @@
             </trans-unit>
             <trans-unit id="action.edit_product">
                 <source>action.edit_product</source>
-                <target>Modifier l'Product</target>
+                <target>Modifier l'Produit</target>
             </trans-unit>
             <trans-unit id="action.save">
                 <source>action.save</source>
@@ -115,7 +115,7 @@
             </trans-unit>
             <trans-unit id="action.delete_product">
                 <source>action.delete_product</source>
-                <target>Supprimer l'Product</target>
+                <target>Supprimer l'Produit</target>
             </trans-unit>
             <trans-unit id="delete_product_modal.title">
                 <source>delete_product_modal.title</source>
@@ -127,7 +127,7 @@
             </trans-unit>
             <trans-unit id="label.delete_product">
                 <source>label.delete_product</source>
-                <target>Supprimer l'Product</target>
+                <target>Supprimer Produit</target>
             </trans-unit>
             <trans-unit id="label.cancel">
                 <source>label.cancel</source>
@@ -135,11 +135,11 @@
             </trans-unit>
             <trans-unit id="label.create_product">
                 <source>label.create_product</source>
-                <target>Créer un Product</target>
+                <target>Créer un Produit</target>
             </trans-unit>
             <trans-unit id="action.create_product">
                 <source>action.create_product</source>
-                <target>Créer un nouvel Product</target>
+                <target>Créer un nouvel Produit</target>
             </trans-unit>
             <trans-unit id="label.save_and_create_new">
                 <source>label.save_and_create_new</source>
@@ -147,7 +147,7 @@
             </trans-unit>
             <trans-unit id="action.back_to_list">
                 <source>action.back_to_list</source>
-                <target>Retour à la liste des Products</target>
+                <target>Retour à la liste des Produits</target>
             </trans-unit>
             <trans-unit id="action.publish_comment">
                 <source>action.publish_comment</source>
@@ -212,7 +212,7 @@
             </trans-unit>
             <trans-unit id="title.product_new">
                 <source>title.product_new</source>
-                <target>Ajouter un nouvel Product</target>
+                <target>Ajouter un nouvel Produit</target>
             </trans-unit>
             <trans-unit id="action.edit_contents">
                 <source>action.edit_contents</source>
@@ -229,7 +229,7 @@
             </trans-unit>
             <trans-unit id="menu.product_list">
                 <source>menu.product_list</source>
-                <target>Liste des Products</target>
+                <target>Liste des Produits</target>
             </trans-unit>
             <trans-unit id="menu.back_to_blog">
                 <source>menu.back_to_blog</source>
@@ -266,32 +266,32 @@
             </trans-unit>
             <trans-unit id="product.no_comments">
                 <source>product.no_comments</source>
-                <target>Soyez le premier à commenter cet Product.</target>
+                <target>Soyez le premier à commenter cet Produit.</target>
             </trans-unit>
             <trans-unit id="product.no_products_found">
                 <source>product.no_products_found</source>
-                <target>Aucun Product trouvé.</target>
+                <target>Aucun Produit creé.</target>
             </trans-unit>
             <trans-unit id="product.created_successfully">
                 <source>product.created_successfully</source>
-                <target>Product créé avec succès !</target>
+                <target>Produit créé avec succès !</target>
             </trans-unit>
             <trans-unit id="product.updated_successfully">
                 <source>product.updated_successfully</source>
-                <target>Product mis à jour avec succès !</target>
+                <target>Produit mis à jour avec succès !</target>
             </trans-unit>
             <trans-unit id="product.deleted_successfully">
                 <source>product.deleted_successfully</source>
-                <target>Product supprimé avec succès !</target>
+                <target>Produit supprimé avec succès !</target>
             </trans-unit>
 
             <trans-unit id="notification.comment_created">
                 <source>notification.comment_created</source>
-                <target>Votre Product a reçu un commentaire !</target>
+                <target>Votre Produit a reçu un commentaire !</target>
             </trans-unit>
             <trans-unit id="notification.comment_created.description">
                 <source>notification.comment_created.description</source>
-                <target><![CDATA[Votre Product "%title%" a reçu un nouveau commentaire. Vous pouvez lire le commentaire en suivant <a href="%link%">ce lien</a>]]></target>
+                <target><![CDATA[Votre Produit "%title%" a reçu un nouveau commentaire. Vous pouvez lire le commentaire en suivant <a href="%link%">ce lien</a>]]></target>
             </trans-unit>
 
             <trans-unit id="help.app_description">
@@ -341,7 +341,7 @@
             </trans-unit>
             <trans-unit id="rss.description">
                 <source>rss.description</source>
-                <target>Derniers Products publiés sur le blog de démo Symfony</target>
+                <target>Derniers Produits publiés sur le blog de démo Symfony</target>
             </trans-unit>
 
             <trans-unit id="form.username">
@@ -365,6 +365,21 @@
                      <source>commande.created_reset</source>
                      <target>Votre commande n'a pas pu être enregistrée.</target>
              </trans-unit>
+
+            <trans-unit id="menu.supplier_liste">
+                  <source>menu.supplier_list</source>
+                  <target>Fournisseurs</target>
+            </trans-unit>
+
+            <trans-unit id="commande.no_commande_found">
+                  <source>commande.no_commande_found</source>
+                  <target>Veuillez ajouter une commande </target>
+            </trans-unit>
+            <trans-unit id="action.create_commande">
+                  <source>action.create_commande</source>
+                  <target>Ajouter vos commandes </target>
+            </trans-unit>
+
 
         </body>
     </file>
