@@ -11,7 +11,9 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\Product;
 use AppBundle\Entity\Supplier;
+use UserBundle\Entity\User;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -42,11 +44,37 @@ class SupplierFixtures extends AbstractFixture implements ContainerAwareInterfac
 
 
 
-        $fournisseur2 = new Supplier();
-        $fournisseur2->setName('Fournisseur2');
-        $fournisseur2->setAddress('Tana 102');
-        $fournisseur2->setPhone('0331245689');
-        $manager->persist($fournisseur2);
+        $fournisseur = new Supplier();
+        $fournisseur->setName('Fournisseur2');
+        $fournisseur->setAddress('Tana 102');
+        $fournisseur->setPhone('0331245689');
+        $manager->persist($fournisseur);
+
+        $hobianUser = new User();
+        $hobianUser->setName('Aninomenjanahary');
+        $hobianUser->setFirstName('Hobiana');
+        $hobianUser->setUsername('hobiana_user');
+        $hobianUser->setEmail('hobiana@gmail.com');
+        $hobianUser->setPhone('0330409164');
+        $hobianUser->setAddress('Lot IVW MHA');
+        $hobianUser->setEnabled(1);
+        $hobianUser->setRoles(['ROLE_USER']);
+        $encodedPassword = $passwordEncoder->encodePassword($hobianUser, '123456');
+        $hobianUser->setPassword($encodedPassword);
+        $manager->persist($hobianUser);
+
+        $product = new Product();
+        $product->setTitle('Product test');
+        $product->setQuantity('10');
+        $product->setGenre('Homme');
+        $product->setMark('MR1');
+        $product->setPrice('10');
+        $product->setTypes('Soleil');
+        $product->setSupplier($fournisseur);
+        $product->setUser($hobianUser);
+        $manager->persist($product);
+
+
 
 
         $manager->flush();

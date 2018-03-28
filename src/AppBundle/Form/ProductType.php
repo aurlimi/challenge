@@ -32,7 +32,7 @@ class ProductType extends AbstractType
             ])
             ->add('quantity',IntegerType::class,[
                 'label' => 'label.quantity',
-                'attr' =>['min' => 0]
+                'attr' =>['min' => 1]
             ])
             ->add('price',null,[
                 'label' =>'label.price'
