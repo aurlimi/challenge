@@ -18,7 +18,7 @@
                 <tr>
                     <td><a href="{{ path('app_commande_show', { 'id': commande.id }) }}">{{ commande.id }} </a></td>
                     <td>{% if commande.date %}{{ commande.date|date('d/m/Y H:i:s') }}{% endif %}</td>
-                    <td>{{ commande.prixTotal }}</td>
+                    <td>{{ commande.prixTotal }} €</td>
                     <td>
                         <ul>
                             <li>

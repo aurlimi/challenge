@@ -57,11 +57,7 @@ class AppController extends Controller
             $data = $form->get('commande_produits')->getData();
 
             foreach ($data as $data) {
-                $data->setCommande($commande);
-                //if data in commande product
-                /*if(in_array($data,$commande->getCommandeProduits()))
-                     continue;*/
-
+                $data->setCommande($commande);  
                 $em->persist($data);
             }
             $em->persist($commande);
