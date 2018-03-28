@@ -96,7 +96,6 @@ class ProductController extends Controller
      */
     public function editAction(Request $request, Product $product)
     {
-       // $this->denyAccessUnlessGranted('edit', $product, 'Products can only be edited by their authors.');
 
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
@@ -129,7 +128,7 @@ class ProductController extends Controller
         }
 
         $commandes = $product->getProduitCommandes();
-        if (!empty($commandes)){
+        if (!empty($commandes[0])){
             $this->addFlash('danger', 'product.deleted_reset');
             return $this->redirectToRoute('admin_product_index');
         }

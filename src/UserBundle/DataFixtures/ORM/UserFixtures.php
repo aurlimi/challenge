@@ -41,7 +41,8 @@ class UserFixtures extends AbstractFixture implements ContainerAwareInterface
         $passwordEncoder = $this->container->get('security.password_encoder');
 
         $aurlAdmin = new User();
-        $aurlAdmin->setFirstName('Aninomenjanahary');
+        $aurlAdmin->setName('Arinomenjanahary');
+        $aurlAdmin->setFirstName('Aurl');
         $aurlAdmin->setUsername('aurl_admin');
         $aurlAdmin->setEmail('auretana@gmail.com');
         $aurlAdmin->setPhone('0330409164');
@@ -52,8 +53,18 @@ class UserFixtures extends AbstractFixture implements ContainerAwareInterface
         $aurlAdmin->setPassword($encodedPassword);
         $manager->persist($aurlAdmin);
 
-
-        
+        $hobianUser = new User();
+        $hobianUser->setName('Aninomenjanahary');
+        $hobianUser->setFirstName('Hobiana');
+        $hobianUser->setUsername('hobiana_user');
+        $hobianUser->setEmail('hobiana@gmail.com');
+        $hobianUser->setPhone('0330409164');
+        $hobianUser->setAddress('Lot IVW MHA');
+        $hobianUser->setEnabled(1);
+        $hobianUser->setRoles(['ROLE_USER']);
+        $encodedPassword = $passwordEncoder->encodePassword($hobianUser, '123456');
+        $hobianUser->setPassword($encodedPassword);
+        $manager->persist($hobianUser);
 
         $manager->flush();
     }

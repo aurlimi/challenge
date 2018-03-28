@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="commande")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CommandeRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Commande
 {
@@ -38,6 +39,13 @@ class Commande
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+    
+    /**
+     * @var int
+     * 
+     * @ORM\Column(name="prix_total", type="float", nullable=true)
+     */
+    private $prix_total;
 
     /**
      *
@@ -51,6 +59,14 @@ class Commande
         $this->date = new \DateTime();
         $this->commande_produits = new  ArrayCollection();
     }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function persistPrixTotal(){
+        $this->setPrixTotal();
+    }
+
 
     /**
      * Get id.
@@ -144,5 +160,31 @@ class Commande
     public function getCommandeProduits()
     {
         return $this->commande_produits;
+    }
+
+
+    /**
+     * Set prixTotal.
+     *
+     * @return Commande
+     */
+    public function setPrixTotal()
+    {
+        $this->prix_total = 0;
+        foreach ( $this->commande_produits as $commande){
+            $this->prix_total = $this->prix_total + $commande->getProduct()->getPrice() * $commande->getQuantity();
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get prixTotal.
+     *
+     * @return float
+     */
+    public function getPrixTotal()
+    {
+        return $this->prix_total;
     }
 }

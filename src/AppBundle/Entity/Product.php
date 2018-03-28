@@ -11,6 +11,7 @@ use FOS\UserBundle\Model\User;
  *
  * @ORM\Table(name="product")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Product
 {
@@ -66,6 +67,13 @@ class Product
     private $quantity;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="quantity_stock", type="integer", nullable=true)
+     */
+    private $quantity_stock;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="price", type="float")
@@ -93,6 +101,28 @@ class Product
      * @ORM\OneToMany(targetEntity="CommandeProduct", mappedBy="product", cascade={"persist"})
      */
     private $produit_commandes;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function persistQuantityStock(){
+        $this->setQuantityStock($this->quantity);
+    }
+
+    /**
+     *
+     * @ORM\PreUpdate
+     */
+
+     public function updateQuatityStok(){
+         $q_stock = 0;
+         foreach ($this->getProduitCommandes() as $commande)
+         {
+            $q_stock = $q_stock + $commande->getQuantity();
+         }
+
+         $this->setQuantityStock($this->quantity - $q_stock);
+     }
 
     /**
      * Get id
@@ -365,5 +395,29 @@ class Product
     public function getProduitCommandes()
     {
         return $this->produit_commandes;
+    }
+
+    /**
+     * Set quantityStock.
+     *
+     * @param int|null $quantityStock
+     *
+     * @return Product
+     */
+    public function setQuantityStock($quantityStock = null)
+    {
+        $this->quantity_stock = $quantityStock;
+
+        return $this;
+    }
+
+    /**
+     * Get quantityStock.
+     *
+     * @return int|null
+     */
+    public function getQuantityStock()
+    {
+        return $this->quantity_stock;
     }
 }

@@ -10,7 +10,10 @@ class RegistrationFormType extends BaseType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('first_name');
+        $builder->add('name', null,
+            ['label' => 'label.name']);
+        $builder->add('first_name', null,
+            ['label' =>'label.first_name']);
         parent::buildForm($builder,$options);
         // On ajoute nos champs :
         $builder->add('phone')

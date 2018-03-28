@@ -1,17 +1,16 @@
 <?php
 
-namespace UserBundle\Entity;
+namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\User as BaseUser;
 
 /**
- * User
+ * Supplier
  *
- * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
+ * @ORM\Table(name="supplier")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\SupplierRepository")
  */
-class User extends BaseUser
+class Supplier
 {
     /**
      * @var int
@@ -20,43 +19,36 @@ class User extends BaseUser
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    protected $name;
+    private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="first_name", type="string", length=255, nullable=false)
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
-    protected $first_name;
+    private $address;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=255, nullable=false)
+     * @ORM\Column(name="phone", type="string", length=50, nullable=true)
      */
-    protected $address;
+    private $phone;
 
     /**
-     * @var string
+     * @var Product
      *
-     * @ORM\Column(name="phone", type="string", length=50, nullable=false)
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Product", mappedBy="supplier")
+     * @ORM\JoinColumn(nullable=false)
      */
-    protected $phone;
-
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->addRole("ROLE_USER");
-
-    }
+    private $products;
 
     /**
      * Get id
@@ -69,35 +61,41 @@ class User extends BaseUser
     }
 
     /**
-     * Set firstName
+     * Set name
      *
-     * @param string $firstName
+     * @param string $name
      *
-     * @return User
+     * @return Supplier
      */
-    public function setFirstName($firstName)
+    public function setName($name)
     {
-        $this->first_name = $firstName;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get firstName
+     * Get name
      *
      * @return string
      */
-    public function getFirstName()
+    public function getName()
     {
-        return $this->first_name;
+        return $this->name;
     }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
 
     /**
      * Set address
      *
      * @param string $address
      *
-     * @return User
+     * @return Supplier
      */
     public function setAddress($address)
     {
@@ -121,7 +119,7 @@ class User extends BaseUser
      *
      * @param string $phone
      *
-     * @return User
+     * @return Supplier
      */
     public function setPhone($phone)
     {
@@ -140,3 +138,4 @@ class User extends BaseUser
         return $this->phone;
     }
 }
+

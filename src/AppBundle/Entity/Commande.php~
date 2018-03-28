@@ -2,6 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Form\CommandeProductType;
+use Doctrine\Common\Collections\ArrayCollection;
+use Userbundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,11 +38,17 @@ class Commande
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+    
+    /**
+     * @var int
+     * 
+     * @ORM\Column(name="prix_total", type="float")
+     */
+    private $prix_total;
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="CommandeProduit", mappedBy="commande",)
-     * @ORM\OrderBy({"publishedAt": "DESC"})
+     * @ORM\OneToMany(targetEntity="CommandeProduct", mappedBy="commande", cascade={"persist"})
      */
     private $commande_produits;
 
@@ -47,6 +56,7 @@ class Commande
     public function __construct()
     {
         $this->date = new \DateTime();
+        $this->commande_produits = new  ArrayCollection();
     }
 
     /**
@@ -82,4 +92,65 @@ class Commande
     {
         return $this->date;
     }
+
+    /**
+     * Set user.
+     *
+     * @param \Userbundle\Entity\User $user
+     *
+     * @return Commande
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user.
+     *
+     * @return \Userbundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add commandeProduit.
+     *
+     * @param \AppBundle\Entity\CommandeProduct $commandeProduit
+     *
+     * @return Commande
+     */
+    public function addCommandeProduit(CommandeProduct $commandeProduit)
+    {
+        $this->commande_produits[] = $commandeProduit;
+
+        return $this;
+    }
+
+    /**
+     * Remove commandeProduit.
+     *
+     * @param \AppBundle\Entity\CommandeProduct $commandeProduit
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeCommandeProduit(CommandeProduct $commandeProduit)
+    {
+        return $this->commande_produits->removeElement($commandeProduit);
+    }
+
+    /**
+     * Get commandeProduits.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCommandeProduits()
+    {
+        return $this->commande_produits;
+    }
+
 }

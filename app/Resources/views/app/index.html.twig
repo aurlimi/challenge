@@ -9,14 +9,16 @@
             <tr>
                 <th scope="col">Numero Commande</th>
                 <th scope="col">Date</th>
+                <th scope="col">Prix total</th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
             <tbody>
             {% for commande in commandes %}
                 <tr>
-                    <td><a href="{{ path('app_commande_show', { 'id': commande.id }) }}">{{ commande.id }}</a></td>
-                    <td>{% if commande.date %}{{ commande.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td><a href="{{ path('app_commande_show', { 'id': commande.id }) }}">{{ commande.id }} </a></td>
+                    <td>{% if commande.date %}{{ commande.date|date('d/m/Y H:i:s') }}{% endif %}</td>
+                    <td>{{ commande.prixTotal }}</td>
                     <td>
                         <ul>
                             <li>

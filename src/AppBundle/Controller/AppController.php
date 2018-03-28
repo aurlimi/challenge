@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("/app")
  *
- * @Security("has_role('ROLE_USER')")
  */
 class AppController extends Controller
 {
@@ -59,6 +58,10 @@ class AppController extends Controller
 
             foreach ($data as $data) {
                 $data->setCommande($commande);
+                //if data in commande product
+                /*if(in_array($data,$commande->getCommandeProduits()))
+                     continue;*/
+
                 $em->persist($data);
             }
             $em->persist($commande);
@@ -83,7 +86,6 @@ class AppController extends Controller
      */
     public function showAction(Commande $commande)
     {
-        $deleteForm = $this->createDeleteForm($commande);
         $commande_produits = $commande->getCommandeProduits();
 
         return $this->render('app/show.html.twig', array(
@@ -103,6 +105,7 @@ class AppController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $commande->setPrixTotal();
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', 'commande.created_successfully');
 

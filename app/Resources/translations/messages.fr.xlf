@@ -343,6 +343,29 @@
                 <source>rss.description</source>
                 <target>Derniers Products publiés sur le blog de démo Symfony</target>
             </trans-unit>
+
+            <trans-unit id="form.username">
+                <source>form.username</source>
+                <target>Login</target>
+            </trans-unit>
+            <trans-unit id="label.name">
+                <source>label.name</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="label.first_name">
+                <source>label.first_name</source>
+                <target>Prénom</target>
+            </trans-unit>
+
+            <trans-unit id="commande.created_successfully">
+                <source>commande.created_successfully</source>
+                <target>Votre commande est enregistrée</target>
+            </trans-unit>
+            <trans-unit id="commande.created_reset">
+                     <source>commande.created_reset</source>
+                     <target>Votre commande n'a pas pu être enregistrée.</target>
+             </trans-unit>
+
         </body>
     </file>
 </xliff>

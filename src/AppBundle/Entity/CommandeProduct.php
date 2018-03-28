@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="commande_product")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CommandeProductRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class CommandeProduct
 {
@@ -52,6 +53,31 @@ class CommandeProduct
     public function __construct()
     {
         
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function persistQuantityStock(){
+        $product = $this->getProduct();
+        $q_stock = $product->getQuantityStock();
+        $product->setQuantityStock($q_stock - $this->quantity);
+    }
+
+    /**
+     *
+     * @ORM\PreUpdate
+     */
+    public function updateQuatityStock(){
+        $this->getCommande()->setPrixTotal();
+        $q_stock = 0;
+        $product = $this->getProduct();
+        foreach ($product->getProduitCommandes() as $commande)
+        {
+            $q_stock = $q_stock + $commande->getQuantity();
+        }
+
+        $product->setQuantityStock($product->getId() - $q_stock);
     }
     
     /**

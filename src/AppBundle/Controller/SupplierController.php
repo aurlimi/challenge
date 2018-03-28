@@ -48,13 +48,7 @@ class SupplierController extends Controller
 
         $form->handleRequest($request);
 
-        // the isSubmitted() method is completely optional because the other
-        // isValid() method already checks whether the form is submitted.
-        // However, we explicitly add it to improve code readability.
-        // See https://symfony.com/doc/current/best_practices/forms.html#handling-form-submits
         if ($form->isSubmitted() && $form->isValid()) {
-            //$post->setSlug($slugger->slugify($post->getTitle()));
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($supplier);
             $em->flush();
@@ -66,7 +60,7 @@ class SupplierController extends Controller
                 return $this->redirectToRoute('admin_supplier_new');
             }
 
-            return $this->redirectToRoute('admin_index');
+            return $this->redirectToRoute('admin_supplier_index');
         }
 
         return $this->render('admin/supplier/new.html.twig', [
@@ -127,7 +121,8 @@ class SupplierController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $products = $supplier->getProducts();
-        if (!empty($products)) {
+        
+        if (!empty($products[0])) {
             $this->addFlash('danger', 'supplier.deleted_reset');
             return $this->redirectToRoute('admin_supplier_index');
         }

@@ -31,7 +31,9 @@ security:
                 path:   fos_user_security_logout
                 target: /
             anonymous: true
-            access_denied_handler: AppBundle\Security\AccessDeniedHandler
+            access_denied_url: app_index
+
+
 
     access_control:
         - { path: ^/(en|fr)$, role: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -39,5 +41,5 @@ security:
         - { path: ^/(en|fr)/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/(en|fr)/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/(en|fr)/admin/, role: ROLE_ADMIN }
-        - { path: ^/(en|fr)/app, role: ROLE_USER }
+        - { path: ^/(en|fr)/app, roles: [ROLE_ADMIN,ROLE_USER] }
 
