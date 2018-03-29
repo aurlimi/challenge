@@ -51,9 +51,7 @@ class AppController extends Controller
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //var_dump($form);
             $em = $this->getDoctrine()->getManager();
-            //
             $data = $form->get('commande_produits')->getData();
 
             foreach ($data as $data) {
@@ -132,7 +130,7 @@ class AppController extends Controller
         $data = $commande->getCommandeProduits();
 
         foreach ($data as $data){
-           $em->remove($data);
+            $em->remove($data);
         }
         $em->remove($commande);
         $em->flush();

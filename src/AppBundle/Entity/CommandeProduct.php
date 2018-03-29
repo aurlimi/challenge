@@ -67,12 +67,12 @@ class CommandeProduct
 
     /**
      *
-     * @ORM\PostRemove
+     * @ORM\PreRemove
      */
-    public function removeQuatityStock(){
-        $q_stock = 0;
+    public function removeQuantityStock(){
         $product = $this->getProduct();
-        $product->updateQuatityStok();
+        $q_stock = $product->getQuantityStock();
+        $product->setQuantityStock($q_stock + $this->quantity);
     }
     
     /**
