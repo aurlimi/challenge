@@ -64,20 +64,6 @@ class CommandeProduct
         $product->setQuantityStock($q_stock - $this->quantity);
     }
 
-    /**
-     *
-     * @ORM\PreUpdate
-     */
-    public function updateQuatityStock(){
-        $q_stock = 0;
-        $product = $this->getProduct();
-        foreach ($product->getProduitCommandes() as $commande)
-        {
-            $q_stock = $q_stock + $commande->getQuantity();
-        }
-
-        $product->setQuantityStock($product->getQuantityStock() - $q_stock);
-    }
 
     /**
      *
@@ -86,12 +72,7 @@ class CommandeProduct
     public function removeQuatityStock(){
         $q_stock = 0;
         $product = $this->getProduct();
-        foreach ($product->getProduitCommandes() as $commande)
-        {
-            $q_stock = $q_stock + $commande->getQuantity();
-        }
-
-        $product->setQuantityStock($product->getQuantityStock() - $q_stock);
+        $product->updateQuatityStok();
     }
     
     /**

@@ -102,6 +102,8 @@ class AppController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $commande->setPrixTotal();
+            $commandeProduct = $commande->getCommandeProduits();
+            $commandeProduct[0]->getProduct()->updateQuatityStok();
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', 'commande.created_successfully');
 
